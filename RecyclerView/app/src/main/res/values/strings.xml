@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RecyclerView</string>
+    <string name="recyclerview">Recycler View</string>
+    <string name="delete">삭제</string>
+    <string name="add">추가</string>
+    <string name="sample_name">손소독</string>
+    <string name="description">설명</string>
+    <string name="address">주소</string>
+</resources>
