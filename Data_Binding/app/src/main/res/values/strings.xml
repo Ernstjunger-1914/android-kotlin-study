@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Data_Binding</string>
+    <string name="ssd">손소독</string>
+    <string name="button">버튼</string>
+</resources>
