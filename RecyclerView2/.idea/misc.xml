@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/study/kotlin/RecyclerView2/app/src/main/res/layout/activity_data_binding.xml" value="0.358695652173913" />
         <entry key="..\:/study/kotlin/RecyclerView2/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/study/kotlin/RecyclerView2/app/src/main/res/layout/activity_view_binding.xml" value="0.358695652173913" />
         <entry key="..\:/study/kotlin/RecyclerView2/app/src/main/res/layout/cell_list_text.xml" value="0.358695652173913" />
