@@ -5,24 +5,25 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // 기본값은 0
-    private var mutableLiveData = MutableLiveData(0)
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
         button.setOnClickListener {
-            mutableLiveData.value = mutableLiveData.value!!.plus(1)
+            viewModel.addLiveDataValue()
         }
 
-        mutableLiveData.observe(this, Observer {
-            Log.d(TAG, "mutableLiveData: ${mutableLiveData.value}")
-            text.text = mutableLiveData.value.toString()
+        viewModel.mutableLiveData.observe(this, Observer {
+            text.text = viewModel.mutableLiveData.value.toString()
         })
     }
 
