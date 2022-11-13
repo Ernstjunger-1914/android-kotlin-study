@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SQLite</string>
+    <string name="insert">Insert</string>
+    <string name="select">Select</string>
+    <string name="delete">Delete</string>
+    <string name="result">결과</string>
+</resources>
