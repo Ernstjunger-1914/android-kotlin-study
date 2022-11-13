@@ -1,4 +1,4 @@
-package com.ssd.study.retrofit
+package com.ssd.study.retrofit.model
 
 data class User(
     val userId: Int,

@@ -1,4 +1,4 @@
-package com.ssd.study.retrofit
+package com.ssd.study.retrofit.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

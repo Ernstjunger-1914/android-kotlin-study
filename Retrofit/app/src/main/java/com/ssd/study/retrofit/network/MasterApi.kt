@@ -1,18 +1,17 @@
 package com.ssd.study.retrofit.network
 
-import com.ssd.study.retrofit.User
-import retrofit2.Call
+import com.ssd.study.retrofit.model.User
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface MasterApi {
 
     @GET("posts/1")
-    fun getPost1(): Call<User>
+    suspend fun getUser1(): User
 
     @GET("posts/{number}")
-    fun getPostNumber(
+    suspend fun getUserNumber(
         @Path("number") number: Int
-    ): Call<User>
+    ): User
 
 }
