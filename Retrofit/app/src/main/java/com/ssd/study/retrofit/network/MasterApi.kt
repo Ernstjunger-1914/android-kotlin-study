@@ -14,4 +14,7 @@ interface MasterApi {
         @Path("number") number: Int
     ): User
 
+    @GET("posts")
+    suspend fun getPostAll(): List<User>
+
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ssd.study.retrofit.model.User
 import com.ssd.study.retrofit.network.MasterApi
 import com.ssd.study.retrofit.network.RetrofitInstance
 import kotlinx.coroutines.launch
@@ -21,6 +22,10 @@ class MainViewModel : ViewModel() {
     val getUser2: LiveData<String>
         get() = _mutableUser2
 
+    private var _getAllUser = MutableLiveData<List<User>>()
+    val getAllUser: LiveData<List<User>>
+        get() = _getAllUser
+
     fun getUser1() = viewModelScope.launch {
         val user = retrofitInstance.getUser1()
 
@@ -33,6 +38,13 @@ class MainViewModel : ViewModel() {
 
         Log.d(TAG, user.toString())
         _mutableUser2.value = user.title
+    }
+
+    fun getPostAll() = viewModelScope.launch {
+        val allUser = retrofitInstance.getPostAll()
+
+        Log.d(TAG, allUser.toString())
+        _getAllUser.value = allUser
     }
 
     companion object {

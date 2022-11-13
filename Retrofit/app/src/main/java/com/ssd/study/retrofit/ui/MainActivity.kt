@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ssd.study.retrofit.R
+import com.ssd.study.retrofit.model.User
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,17 +19,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.getUser1()
-        viewModel.getUserNumber(4)
+        viewModel.getPostAll()
 
-        val text1 = findViewById<TextView>(R.id.textView1)
-        val text2 = findViewById<TextView>(R.id.textView2)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
-        viewModel.getUser1.observe(this, Observer {
-            text1.text = it.toString()
-        })
-        viewModel.getUser2.observe(this, Observer {
-            text2.text = it.toString()
+        viewModel.getAllUser.observe(this, Observer {
+            val viewHolder =
+                MainViewHolder(it as ArrayList<User> /* = java.util.ArrayList<com.ssd.study.retrofit.model.User> */)
+
+            recyclerView.adapter = viewHolder
+            recyclerView.layoutManager = LinearLayoutManager(this)
         })
     }
 
