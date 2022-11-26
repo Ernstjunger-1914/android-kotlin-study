@@ -9,6 +9,7 @@ import com.ssd.mobile.android.study.workmanager.manager.WorManagerA
 import com.ssd.mobile.android.study.workmanager.manager.WorManagerB
 import com.ssd.mobile.android.study.workmanager.manager.WorkManagerC
 import com.ssd.mobile.android.study.workmanager.manager.WorkManagerC.Companion.PROGRESS
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,15 +21,21 @@ class MainActivity : AppCompatActivity() {
 //            "a" to 10,
 //            "b" to 20
 //        )
-        val workManagerA = OneTimeWorkRequestBuilder<WorManagerA>().build()
+
+//        val workManagerA = OneTimeWorkRequestBuilder<WorManagerA>().build()
+
+        // 1분 마다 작업 실행
+        val workManagerA = PeriodicWorkRequestBuilder<WorManagerA>(1, TimeUnit.MINUTES).build()
 //        val workManagerB = OneTimeWorkRequestBuilder<WorManagerB>().setInputData(data).build()
         val workManagerB = OneTimeWorkRequestBuilder<WorManagerB>().build()
         val workManagerC = OneTimeWorkRequestBuilder<WorkManagerC>().build()
 
-        WorkManager.getInstance(this)
-            .beginWith(listOf(workManagerA, workManagerB))
-            .then(workManagerC)
-            .enqueue()
+        WorkManager.getInstance(this).enqueue(workManagerA)
+
+//        WorkManager.getInstance(this)
+//            .beginWith(listOf(workManagerA, workManagerB))
+//            .then(workManagerC)
+//            .enqueue()
 
         WorkManager.getInstance(this)
             .getWorkInfoByIdLiveData(workManagerC.id)
