@@ -12,7 +12,7 @@ class WorManagerA(
 
     override fun doWork(): Result {
         for (i in 1..10) {
-            sleep(1000)
+            sleep(500)
             Log.d(TAG, i.toString())
         }
         return Result.success()
