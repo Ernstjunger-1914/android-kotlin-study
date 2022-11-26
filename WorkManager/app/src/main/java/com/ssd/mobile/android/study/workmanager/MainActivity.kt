@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
+import androidx.work.*
 import com.ssd.mobile.android.study.workmanager.manager.WorManagerA
 import com.ssd.mobile.android.study.workmanager.manager.WorManagerB
 import com.ssd.mobile.android.study.workmanager.manager.WorkManagerC
+import com.ssd.mobile.android.study.workmanager.manager.WorkManagerC.Companion.PROGRESS
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +29,18 @@ class MainActivity : AppCompatActivity() {
             .beginWith(listOf(workManagerA, workManagerB))
             .then(workManagerC)
             .enqueue()
+
+        WorkManager.getInstance(this)
+            .getWorkInfoByIdLiveData(workManagerC.id)
+            .observe(this, Observer { workInfo: WorkInfo? ->
+                val process = workInfo?.progress
+                val value = process?.getInt(PROGRESS, 0)
+
+                if (value != 0) Log.d(TAG, "${value.toString()}%")
+
+
+                if (value == 100) Log.d(TAG, "END")
+            })
 
 //        WorkManager.getInstance(this).getWorkInfoByIdLiveData(workManagerB.id)
 //            .observe(this, Observer { info ->
