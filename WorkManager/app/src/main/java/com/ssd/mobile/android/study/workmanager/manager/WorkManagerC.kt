@@ -2,19 +2,38 @@ package com.ssd.mobile.android.study.workmanager.manager
 
 import android.content.Context
 import android.util.Log
-import androidx.work.Worker
+import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 class WorkManagerC(
     context: Context, workerParameters: WorkerParameters
-) : Worker(context, workerParameters) {
+) : CoroutineWorker(context, workerParameters) {
 
-    override fun doWork(): Result {
-        for (i in 1..10) {
-            Thread.sleep(500)
-            Log.d(TAG, i.toString())
+    override suspend fun doWork(): Result {
+
+        withContext(Dispatchers.IO) {
+            count1()
+            count2()
         }
+
         return Result.success()
+    }
+
+    private suspend fun count1() {
+        for (i in 1..10) {
+            delay(100)
+            Log.d(TAG, "count1: $i")
+        }
+    }
+
+    private suspend fun count2() {
+        for (i in 1..10) {
+            delay(100)
+            Log.d(TAG, "count2: $i")
+        }
     }
 
     companion object {
